@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
         $this->load->library('grocery_CRUD');
 	}
 	public function index() {
-		$data['gcrud']=1;
+		$data['gcrud']=0;
 		$this->load->view('new/admin',$data);
 	}
 	public function tentangkami() {
@@ -21,8 +21,27 @@ class Admin extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('haldep');
 			$crud->set_subject('Tentang Kami');
-			$crud->unset_add();
-			$crud->unset_delete();
+			$crud->unset_columns(['foto']);
+			$crud->unset_add_fields(['foto']);
+			$crud->unset_edit_fields(['foto']);
+			$output = $crud->render();
+
+			$data['output']=(object)$output;
+			$this->load->view('new/admin',$data);
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+
+	}
+	public function gambardepan() {
+		$data['gcrud']=1;
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('flexigrid');
+			$crud->set_table('haldep');
+			$crud->set_subject('Gambar Depan');
+			$crud->set_field_upload('foto','assets/uploads/files');
 			$output = $crud->render();
 
 			$data['output']=(object)$output;
@@ -66,7 +85,58 @@ class Admin extends CI_Controller {
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+	}
+	public function kategori_galery() {
+		$data['gcrud']=1;
+		try{
+			$crud = new grocery_CRUD();
 
+			$crud->set_theme('flexigrid');
+			$crud->set_table('kategori_galery');
+			$crud->set_subject('Kategori Galery');
+			$crud->set_field_upload('foto','assets/uploads/files');
+			$output = $crud->render();
+			
+			$data['output']=(object)$output;
+			$this->load->view('new/admin',$data);
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	public function galery() {
+		$data['gcrud']=1;
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('flexigrid');
+			$crud->set_table('galery');
+			$crud->set_subject('Galery');
+			$crud->set_relation('id_kategori', 'kategori_galery', 'kategori_galery');
+			$crud->set_field_upload('foto','assets/uploads/files');
+			$output = $crud->render();
+			
+			$data['output']=(object)$output;
+			$this->load->view('new/admin',$data);
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+	public function blog() {
+		$data['gcrud']=1;
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('flexigrid');
+			$crud->set_table('blog');
+			$crud->set_subject('Our Website');
+			$crud->set_field_upload('foto','assets/uploads/files');
+			$output = $crud->render();
+			
+			$data['output']=(object)$output;
+			$this->load->view('new/admin',$data);
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
 	}
 	
 }

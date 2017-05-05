@@ -20,8 +20,27 @@ class Tampil extends CI_Controller {
 	}
 	public function index() {
 		$data['title']=".:: Selamat Datang di Pondok Pesantren Darul Salam Amtsilati  ::.";
-		$web['haldep']	= $this->db->query("SELECT * FROM haldep")->row();
-		$data['who']=$web['haldep']->isi;
+		$web['haldep']	= $this->db->query("SELECT * FROM haldep");
+		$web['haldep']=$web['haldep']->result();
+		$data['who']="";
+		$data['kontak']="";
+		$data['katamutiara']="";
+		$data['gambardepan']="";
+		foreach ($web['haldep'] as $key) {
+			if($key->role=="tentang"){
+				$data['who']=$key->isi;	
+			}
+			if($key->role=="kontak"){
+				$data['kontak']=$key->isi;	
+			}
+			if($key->role=="katamutiara"){
+				$data['katamutiara']=$key->isi;	
+			}
+			if($key->role=="gambar_depan"){
+				$data['gambardepan']=$key->foto;	
+			}
+		}
+		
 		$this->load->view('new/index',$data);
 	}
 	public function profil() {

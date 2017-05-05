@@ -8,6 +8,15 @@
 <meta name="author" content="">
 <link href="<?php echo base_url(); ?>new/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>new/css/style.css" rel="stylesheet">
+<style type="text/css">
+	#header-wrapper.header-slider {
+	background: #444 url('<?php echo base_url(); ?>assets/uploads/files/<?php echo $gambardepan; ?>') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+</style>
 <link href="<?php echo base_url(); ?>new/color/default.css" rel="stylesheet">
 <link rel="shortcut icon" href="<?php echo base_url(); ?>new/img/favicon.ico">
 <!-- =======================================================
@@ -33,9 +42,8 @@
 					<li><a title="team" href="#about">Tentang Kami</a></li>
 					<li><a title="services" href="#services">Visi & Misi</a></li>
 					<li><a title="works" href="#works">Gallery</a></li>
-					<li><a title="blog" href="#blog">Blog</a></li>
-					<li><a title="contact" href="#contact">Contact</a></li>
-					<li><a href="page.html">Page</a></li>
+					<li><a title="blog" href="#blog">Website</a></li>
+					<li><a title="contact" href="#contact">Kontak Kami</a></li>
 				</ul>
 				</nav>
 			</div>
@@ -157,20 +165,17 @@
 		<div id="filters" class="span12">
 			<ul class="clearfix">
 				<li><a href="#" data-filter="*" class="active">
-				<h5>Galery Foto</h5>
+				<h5>Semua</h5>
 				</a></li>
-				<li><a href="#" data-filter=".web">
-				<h5>Website Kami</h5>
-				</a></li>
-				<li><a href="#" data-filter=".print">
-				<h5>Print</h5>
-				</a></li>
-				<li><a href="#" data-filter=".design">
-				<h5>Design</h5>
-				</a></li>
-				<li><a href="#" data-filter=".photography">
-				<h5>Photography</h5>
-				</a></li>
+				<?php  
+				$data=$this->db->get("kategori_galery");
+				$data=$data->result();
+				foreach ($data as $key) {
+					?>
+					<li><a href="#" data-filter=".<?php echo $key->id; ?>hh"><h5><?php echo $key->kategori_galery; ?></h5></a></li>	
+					<?php
+				}
+				?>
 			</ul>
 		</div>
 		<!-- END PORTFOLIO FILTERING -->
@@ -179,154 +184,27 @@
 		<div class="span12">
 			<div id="portfolio-wrap">
 				<!-- portfolio item -->
-				<div class="portfolio-item grid print photography">
+				<?php  
+				$data=$this->db->get("galery");
+				$data=$data->result();
+				foreach ($data as $key) {
+					?>
+				<div class="portfolio-item <?php echo $key->id; ?>hh">
 					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/1.png" alt="" />
+						<a href="<?php echo base_url(); ?>assets/uploads/files/<?php echo $key->foto; ?>" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
+						<img src="<?php echo base_url(); ?>assets/uploads/files/<?php echo $key->foto; ?>" alt="" />
 						<div class="portfolio-overlay">
 							<div class="thumb-info">
-								<h5>Portfolio name</h5>
+								<h5><?php echo $key->nama; ?></h5>
 								<i class="icon-plus icon-2x"></i>
 							</div>
 						</div>
 						</a>
 					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid print design web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/2.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid print design">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/3.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/4.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/5.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/6.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/7.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/8.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid photography web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/9.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
-				<!-- end portfolio item -->
-				<!-- portfolio item -->
-				<div class="portfolio-item grid design web">
-					<div class="portfolio">
-						<a href="<?php echo base_url(); ?>new/img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
-						<img src="<?php echo base_url(); ?>new/img/works/10.png" alt="" />
-						<div class="portfolio-overlay">
-							<div class="thumb-info">
-								<h5>Portfolio name</h5>
-								<i class="icon-plus icon-2x"></i>
-							</div>
-						</div>
-						</a>
-					</div>
-				</div>
+				</div>		
+					<?php
+				}
+				?>
 				<!-- end portfolio item -->
 			</div>
 		</div>
@@ -339,7 +217,7 @@
 	<div class="row">
 		<div class="span12 aligncenter flyLeft">
 			<blockquote class="large">
-				 We are an established and trusted web agency with a reputation for commitment and high integrity
+				 <?php echo $katamutiara; ?>
 			</blockquote>
 		</div>
 		<div class="span12 aligncenter flyRight">
@@ -355,82 +233,39 @@
 	<h4>Our Blog</h4>
 	<!-- Three columns -->
 	<div class="row">
-		<div class="span3">
+<?php  
+$data=$this->db->get("blog");
+$data=$data->result();
+foreach ($data as $key) {
+	?>
+	<div class="span3">
 			<div class="home-post">
 				<div class="post-image">
-					<img class="max-img" src="<?php echo base_url(); ?>new/img/blog/img1.jpg" alt="" />
+					<img class="max-img" src="<?php echo base_url(); ?>assets/uploads/files/<?php echo $key->foto; ?>" alt="" />
 				</div>
 				<div class="post-meta">
 					<i class="icon-file icon-2x"></i>
-					<span class="date">June 19, 2013</span>
-					<span class="tags"><a href="#">Design</a>, <a href="#">Blog</a></span>
+					<span class="date">
+						<?php  
+							$date=date_create($key->release_date);
+							echo date_format($date,"d M Y");
+						?>
+					</span>
+					<span class="tags"><a href="#"><?php echo $key->kategori_website; ?></a></span>
 				</div>
 				<div class="entry-content">
-					<h5><strong><a href="#">New design trends</a></strong></h5>
+					<h5><strong><a href="#"><?php echo $key->nama_website; ?></a></strong></h5>
 					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
+					<?php echo $key->ket; ?>
 					</p>
 					<a href="#" class="more">Read more</a>
 				</div>
 			</div>
 		</div>
-		<div class="span3">
-			<div class="home-post">
-				<div class="post-image">
-					<img class="max-img" src="<?php echo base_url(); ?>new/img/blog/img2.jpg" alt="" />
-				</div>
-				<div class="post-meta">
-					<i class="icon-file icon-2x"></i>
-					<span class="date">June 19, 2013</span>
-					<span class="tags"><a href="#">Design</a>, <a href="#">News</a></span>
-				</div>
-				<div class="entry-content">
-					<h5><strong><a href="#">Retro is great</a></strong></h5>
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-					</p>
-					<a href="#" class="more">Read more</a>
-				</div>
-			</div>
-		</div>
-		<div class="span3">
-			<div class="home-post">
-				<div class="post-image">
-					<img class="max-img" src="<?php echo base_url(); ?>new/img/blog/img3.jpg" alt="" />
-				</div>
-				<div class="post-meta">
-					<i class="icon-file icon-2x"></i>
-					<span class="date">June 22, 2013</span>
-					<span class="tags"><a href="#">Design</a>, <a href="#">Tips</a></span>
-				</div>
-				<div class="entry-content">
-					<h5><strong><a href="#">Isometric mockup</a></strong></h5>
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-					</p>
-					<a href="#" class="more">Read more</a>
-				</div>
-			</div>
-		</div>
-		<div class="span3">
-			<div class="home-post">
-				<div class="post-image">
-					<img class="max-img" src="<?php echo base_url(); ?>new/img/blog/img4.jpg" alt="" />
-				</div>
-				<div class="post-meta">
-					<i class="icon-file icon-2x"></i>
-					<span class="date">June 27, 2013</span>
-					<span class="tags"><a href="#">News</a>, <a href="#">Tutorial</a></span>
-				</div>
-				<div class="entry-content">
-					<h5><strong><a href="#">Free icon set</a></strong></h5>
-					<p>
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. &hellip;
-					</p>
-					<a href="#" class="more">Read more</a>
-				</div>
-			</div>
-		</div>
+	<?php
+}
+?>
+		
 	</div>
 	<div class="blankdivider30"></div>
 	<div class="aligncenter">
@@ -443,9 +278,9 @@
 <!-- section: contact -->
 <section id="contact" class="section green">
 <div class="container">
-	<h4>Get in Touch</h4>
+	<h4>Kontak Kami</h4>
 	<p>
-		 Reque facer nostro et ius, cu persius mnesarchum disputando eam, clita prompta et mel vidisse phaedrum pri et. Facilisis posidonium ex his. Mutat iudico vis in, mea aeque tamquam scripserit an, mea eu ignota viderer probatus. Lorem legere consetetur ei eum. Sumo aeque assentior te eam, pri nominati posidonium consttuam
+		 <?php echo $kontak; ?>
 	</p>
 	<div class="blankdivider30">
 	</div>
